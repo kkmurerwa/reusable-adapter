@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.murerwa.reusableadapter.databinding.FragmentFirstBinding
+import com.murerwa.reusableadapter.databinding.ListItemStringBinding
 
 class FirstFragment : Fragment(R.layout.fragment_first) {
     private var _binding: FragmentFirstBinding? = null
@@ -20,7 +21,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
     private fun initViews() {
         val listOfStrings = listOf("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten")
 
-        val stringItemAdapter = StringItemAdapter(listOfStrings)
+        val stringItemAdapter = GenericAdapter<String, ListItemStringBinding>(listOfStrings)
 
         binding.recyclerView.adapter = stringItemAdapter
     }
