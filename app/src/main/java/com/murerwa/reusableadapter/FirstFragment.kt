@@ -13,6 +13,16 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         super.onViewCreated(view, savedInstanceState)
 
         _binding = FragmentFirstBinding.bind(view)
+
+        initViews()
+    }
+
+    private fun initViews() {
+        val listOfStrings = listOf("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten")
+
+        val stringItemAdapter = StringItemAdapter(listOfStrings)
+
+        binding.recyclerView.adapter = stringItemAdapter
     }
 
     override fun onDestroyView() {
