@@ -33,14 +33,12 @@ class GenericAdapter<T, BT>(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = list[position]
 
-        holder.bindView(currentItem, holder.itemView)
+        bind(currentItem, holder.itemView)
     }
 
     override fun getItemCount(): Int = list.size
 
-    inner class ViewHolder(private val binding: BT): RecyclerView.ViewHolder((binding as ViewBinding).root) {
-        fun bindView(item: T, itemView: View) {
-            bind(item, itemView)
-        }
-    }
+    inner class ViewHolder(
+        binding: BT
+    ): RecyclerView.ViewHolder((binding as ViewBinding).root)
 }
