@@ -1,8 +1,10 @@
 package com.murerwa.reusableadapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import com.murerwa.reusableadapter.databinding.ListItemStringBinding
 
 /**
@@ -17,29 +19,28 @@ import com.murerwa.reusableadapter.databinding.ListItemStringBinding
  *
  */
 class GenericAdapter<T, BT>(
-    private val list: List<T>
+    private val list: List<T>,
+    private val bind: (T, View) -> Unit
 ): RecyclerView.Adapter<GenericAdapter<T, BT>.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
         val binding = ListItemStringBinding.inflate(layoutInflater, parent, false)
 
-        return ViewHolder(binding)
+        return ViewHolder(binding as BT)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = list[position]
 
-        holder.bindView(currentItem)
+        holder.bindView(currentItem, holder.itemView)
     }
 
     override fun getItemCount(): Int = list.size
 
-    inner class ViewHolder(private val binding: ListItemStringBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bindView(item: T) {
-            binding.apply {
-                textView.text = item as String
-            }
+    inner class ViewHolder(private val binding: BT): RecyclerView.ViewHolder((binding as ViewBinding).root) {
+        fun bindView(item: T, itemView: View) {
+            bind(item, itemView)
         }
     }
 }

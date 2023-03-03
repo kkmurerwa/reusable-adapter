@@ -21,9 +21,17 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
     private fun initViews() {
         val listOfStrings = listOf("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten")
 
-        val stringItemAdapter = GenericAdapter<String, ListItemStringBinding>(listOfStrings)
+        val stringItemAdapter = GenericAdapter<String, ListItemStringBinding>(
+            list = listOfStrings,
+            bind = { item: String, itemView: View -> bindView(item, itemView) }
+        )
 
         binding.recyclerView.adapter = stringItemAdapter
+    }
+
+    private fun bindView(item: String, itemView: View) {
+        val binding = ListItemStringBinding.bind(itemView)
+        binding.textView.text = item
     }
 
     override fun onDestroyView() {
