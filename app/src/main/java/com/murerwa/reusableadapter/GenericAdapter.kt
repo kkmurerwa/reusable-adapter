@@ -20,7 +20,7 @@ import com.murerwa.reusableadapter.databinding.ListItemStringBinding
  */
 class GenericAdapter<T, BT>(
     private val list: List<T>,
-    private val bind: (T, View) -> Unit
+    private val bindView: (T, View) -> Unit
 ): RecyclerView.Adapter<GenericAdapter<T, BT>.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -33,7 +33,7 @@ class GenericAdapter<T, BT>(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = list[position]
 
-        bind(currentItem, holder.itemView)
+        bindView(currentItem, holder.itemView)
     }
 
     override fun getItemCount(): Int = list.size

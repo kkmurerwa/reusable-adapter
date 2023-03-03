@@ -23,7 +23,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
         val stringItemAdapter = GenericAdapter<String, ListItemStringBinding>(
             list = listOfStrings,
-            bind = { item: String, itemView: View -> bindView(item, itemView) }
+            bindView = { item: String, itemView: View -> bindView(item, itemView) }
         )
 
         binding.recyclerView.adapter = stringItemAdapter
