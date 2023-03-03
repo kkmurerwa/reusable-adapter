@@ -18,6 +18,7 @@ import com.murerwa.reusableadapter.databinding.ListItemStringBinding
  * Param BT is the binding class type. It should be the binding class for the layout to be inflated.
  *
  */
+@Suppress("UNCHECKED_CAST")
 class GenericAdapter<T, BT>(
     private val list: List<T>,
     private val bindView: (T, View) -> Unit
